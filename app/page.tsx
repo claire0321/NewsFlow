@@ -1,54 +1,35 @@
-"use client";
+import tw from "tailwind-styled-components";
+import NewsApp from "@/components/NewsApp";
+import Image from "next/image";
+import logo from "@/assets/logo.png";
 
-import NewsCard from "./components/news/NewsCard";
-import { useEffect, useState } from "react";
+const Container = tw.section`
+container
+mx-auto
+px-20
+py-15
+`;
+
+const Header = tw.header`
+w-full
+flex
+h-[4rem]
+px-10
+mb-10
+gap-5
+items-center
+`;
 
 function Home() {
-  const [newsData, setNewsData] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  //Make api call to news api
-  async function getNewsData() {
-    //Set loading boolean to true so that we know to show loading text
-    setLoading(true);
-
-    //Make news api call
-    const resp = await fetch(
-      // "https://newsapi.org/v2/everything?q=bitcoin&apiKey=b738ed2669c54125aae96fba7c1107d5&pageSize=10",
-      "/api/news",
+    return (
+        <Container>
+            <Header>
+                <Image src={logo} alt="NewsFlow Logo" className="flex-none" />
+                <h1 className="text-5xl font-bold flex-auto">NewsFlow</h1>
+            </Header>
+            <NewsApp />
+        </Container>
     );
-    const jsonData = await resp.json();
-    setNewsData(jsonData.articles);
-
-    //Set loading boolean to false so that we know to show news articles
-    setLoading(false);
-  }
-
-  useEffect(() => {
-    getNewsData();
-  }, []);
-
-  return (
-    <div>
-      {loading ? (
-        "Loading..."
-      ) : (
-        <div>
-          {newsData.map((newsData: any, index: number) => (
-            <a target="_blank" href={newsData.url} key={index}>
-              <NewsCard
-                title={newsData.title}
-                description={newsData.description}
-                imageUrl={newsData.urlToImage}
-                source={newsData.source.name}
-                publishedAt={newsData.publishedAt}
-              />
-            </a>
-          ))}
-        </div>
-      )}
-    </div>
-  );
 }
 
 export default Home;
