@@ -17,40 +17,60 @@ const CardContainer = tw.section`
   relative
   h-[25rem]
   shadow-2xl
+
   transition-all
+  duration-500
+  ease-out
 
   group
-  hover:translate-y-[-5px]
+  hover:translate-y-1
 `;
 
 const CardThumbnail = tw.div`
   flex-[2]
   w-full
   overflow-hidden
-  group-hover:flex-[1]
 `;
 
 const NewsImg = tw.img`
   w-full
   h-full
   object-cover
+
+  transition-transform
+  duration-700
+  ease-out
+
+  group-hover:scale-105
   `;
 
 const TxtWrap = tw.div<NewsDateProps>`
+  absolute
+  bottom-0
+  left-0
+  right-0
+
+  w-full
+  h-[40%]
+
+  bg-white
+
   p-5
   px-7
-  flex
-  flex-[1]
-  flex-col
-  justify-between
-  gap-3
 
-  transition-transform
+  flex
+  flex-col
+
+  justify-start
+  gap-3
+  group-hover:overflow-hidden
+
+  transition-all
   duration-500
-  translate-y-0
+  ease-out
   
-  group-hover:flex-[2]
-  ${(props) => !props.imageurl && "mt-40"}
+  group-hover:h-[60%]
+  ${(props) => !props.imageurl && "h-[60%] group-hover:h-[70%]"}
 `;
 
 const Tit = tw.h2<NewsDateProps>`
@@ -58,12 +78,11 @@ const Tit = tw.h2<NewsDateProps>`
   font-extrabold
   text-black
   leading-tight
-  flex-[1]
 
   line-clamp-2
 
-  opacity-100
-  group-hover:flex-[0.5]
+  transition-all
+  duration-500
 
   ${(props) => !props.imageurl && "line-clamp-none"}
 `;
@@ -74,15 +93,23 @@ const Description = tw.h3`
   font-medium
 
   opacity-0
+  translate-y-3
+
+  transition-all
+  duration-500
+  ease-out
+
   line-clamp-1
 
   group-hover:opacity-100
-  group-hover:flex-[1]
-  group-hover:line-clamp-4
+  group-hover:translate-y-0
+  group-hover:line-clamp-3
 `;
 
 const Source = tw.p`
-  mt-5
+  absolute
+  bottom-5
+  right-5
   text-xs
   text-gray-500
   text-right
@@ -92,14 +119,24 @@ const DateContainer = tw.div`
   absolute
   top-6
   right-6
+  
   w-[3.5rem]
   h-[3.5rem]
+  
   rounded-full
   bg-blue-500
+  
   flex
   items-center
   justify-center
+  
   shadow-xl/50
+
+  transition-transform
+  duration-500
+  ease-out
+
+  group-hover:scale-110
 `;
 
 const NewsDate = tw.div`
